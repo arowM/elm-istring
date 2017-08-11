@@ -12,7 +12,7 @@ If you use `Html.Lazy.lazy` (or `lazy2`, `lazy3`, etc...) to a view function it 
 you should give a thought to use `IString`.
 
 Let's see the particular situation that have to use `IString`.
-Here is a excerpt of the [example code](./example/src/Strict.elm) in [`/example` directory](./example).
+Here is a excerpt of the [example code](https://github.com/arowM/elm-istring/blob/master/example/src/Strict.elm) in [`/example` directory](https://github.com/arowM/elm-istring/tree/master/example).
 
 ```
 type alias Model =
@@ -92,7 +92,7 @@ After pushing second key "3", the input field shows "3" as it is the only digit 
 And finally, when you input "a", it still shows "3".
 
 So, how about use `Html.Lazy.lazy` to reduce useless rerendering of `digitInput`.
-I'll pick up a snippet from [`example/src/Lazy.elm`](example/src/Lazy.elm).
+I'll pick up a snippet from [`example/src/Lazy.elm`](https://github.com/arowM/elm-istring/blob/master/example/src/Lazy.elm).
 
 ```
 view : Model -> Html Msg
@@ -124,4 +124,4 @@ This causes the strange behavior mentioned above.
 
 The `IString` solves this problem.
 You only have to replace the type of `model.value` `String` with `IString`.
-See [example](example/src/Lazy2.elm) for details.
+See [example](https://github.com/arowM/elm-istring/blob/master/example/src/Lazy2.elm) for details.

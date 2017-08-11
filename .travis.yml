@@ -1,0 +1,17 @@
+sudo: false # force container-based infrastructure
+language: node_js
+node_js:
+  - "6.9"
+install:
+  - yarn global add elm
+  - yarn
+  - cd $TRAVIS_BUILD_DIR/example && yarn
+script:
+  - yarn test
+  - cd $TRAVIS_BUILD_DIR/example && yarn test
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - example/node_modules
+

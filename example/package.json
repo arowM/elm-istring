@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "elm-reactor",
+    "build": "elm-make src/Strict.elm --output ../docs/strict.html && elm-make src/Lazy.elm --output ../docs/lazy.html && elm-make src/Lazy2.elm --output ../docs/lazy2.html",
     "test": "$(yarn bin)/elm-verify-examples && $(yarn bin)/elm-test"
   },
   "devDependencies": {

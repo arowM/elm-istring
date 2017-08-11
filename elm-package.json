@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "summary": "A module to handle difficulty of using `lazy` with `onInput` attribute.",
+    "summary": "A module to handle unexpected behavior when using `lazy` with `input` tag.",
     "repository": "https://github.com/arowM/elm-istring.git",
     "license": "MIT",
     "source-directories": [

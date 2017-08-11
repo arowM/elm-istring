@@ -11,7 +11,7 @@ module IString
 {-| A module to handle difficulty of using `Html.Lazy.lazy` with `Html.Events.onInput`.
 
 In particular situation, using `Html.Lazy.lazy` with view that fires `Html.Events.onInput` event does not behave as same as one without `lazy`.
-For detail about the situation, please see our [minimum example]().
+For detail about the situation, please see [package documentation](http://package.elm-lang.org/packages/arowM/elm-istring/latest).
 
 This module provides a `IString` type and related functions to handle the difficulty mentioned above.
 

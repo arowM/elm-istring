@@ -8,9 +8,9 @@ module IString
         , lens
         )
 
-{-| A module to handle difficulty of using `Html.Lazy.lazy` with `Html.Attributes.onInput`.
+{-| A module to handle difficulty of using `Html.Lazy.lazy` with `Html.Events.onInput`.
 
-In particular situation, using `Html.Lazy.lazy` with view that fires `Html.Attributes.onInput` event does not behave as same as one without `lazy`.
+In particular situation, using `Html.Lazy.lazy` with view that fires `Html.Events.onInput` event does not behave as same as one without `lazy`.
 For detail about the situation, please see our [minimum example]().
 
 This module provides a `IString` type and related functions to handle the difficulty mentioned above.

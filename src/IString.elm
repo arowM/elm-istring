@@ -46,24 +46,12 @@ import Monocle.Lens exposing (Lens)
 
 {-| A main opaque type.
 
-    val : IString
-    val = IString.fromString "foo"
-
-    val2 : IString
-    val2 = IString.set "foo" val
-
-    val == val
-    --> True
-
-    val /= val2
-    --> True
-
-    IString.toString val == IString.toString val2
-    --> True
+    IString.toString <| IString.fromString "foo"
+    --> "foo"
 
 -}
 type IString
-    = IString Int String
+    = IString String
 
 
 
@@ -74,7 +62,7 @@ type IString
 -}
 fromString : String -> IString
 fromString str =
-    IString 0 str
+    IString str
 
 
 
@@ -84,7 +72,7 @@ fromString str =
 {-| Pick `String` value out of `IString`.
 -}
 toString : IString -> String
-toString (IString _ str) =
+toString (IString str) =
     str
 
 
@@ -95,8 +83,8 @@ toString (IString _ str) =
 {-| Modify `IString` value.
 -}
 map : (String -> String) -> IString -> IString
-map f (IString count str) =
-    IString (count + 1) <| f str
+map f (IString str) =
+    IString <| f str
 
 
 {-| Update `IString`.

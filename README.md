@@ -8,11 +8,11 @@ A module to handle unexpected behavior when using `lazy` with `input` tag.
 
 ## When should we use this?
 
-If you use `Html.Lazy.lazy` (or `lazy2`, `lazy3`, etc...) to a view function it contains `input` tag,
+If you use [`Html.Lazy.lazy`](http://package.elm-lang.org/packages/elm-lang/html/latest/Html-Lazy#lazy) (or `lazy2`, `lazy3`, etc...) to a view function it contains `input` tag,
 you should give a thought to use `IString`.
 
-Let's see the particular situation that have to use `IString`.
-Here is a excerpt of the [example code](https://github.com/arowM/elm-istring/blob/master/example/src/Strict.elm) in [`/example` directory](https://github.com/arowM/elm-istring/tree/master/example).
+Let's see one example case that have to use `IString`.
+Here is a excerpt of an [example code](https://github.com/arowM/elm-istring/blob/master/example/src/Strict.elm) in [`/example` directory](https://github.com/arowM/elm-istring/tree/master/example).
 
 ```
 type alias Model =
@@ -58,7 +58,7 @@ digitInput str =
             []
 ```
 
-This code do just update `model.value` when with user input on the `input` tag.
+This code do just update `model.value` when a user inputs a key on the `input` tag.
 The only thing, that is special, is it do some sort of "normalization" before updates.
 
 ```
@@ -79,8 +79,9 @@ normalize =
     String.fromList << List.filter Char.isDigit << String.toList
 ```
 
+Here, the `normalize` function above only filters digit characters.
 As a result, only digit characters are shown on the `input` tag.
-All inputs except digit characters are discarded.
+All user inputs except digit characters are discarded.
 
 Let's assume that you pushed keyboard keys "s" "3" "a" sequentially.
 The first "s" you entered does not affect at all because it is not a digit number.
@@ -90,7 +91,11 @@ And finally, when you input "a", it still shows "3".
 Here's [sample page](https://arowm.github.io/elm-istring/strict.html), which built the source code above.
 
 One of the problem of this code is that this calles `digitInput` on every time some event updates `Model`, even if the updates are not related to `model.value`.
-So, let's think about using `Html.Lazy.lazy` to reduce useless rerendering of `digitInput`.
+
+You can assure that by opening web console on the sample page.
+All the time you click "dummy event" button, which does not affect `model.value` at all, `digitInput was called.: ...` will be printed on your web console.
+
+So, here we should use `Html.Lazy.lazy` to reduce useless rerendering of `digitInput`.
 I'll pick up a snippet from [`example/src/Lazy.elm`](https://github.com/arowM/elm-istring/blob/master/example/src/Lazy.elm).
 
 ```
@@ -106,11 +111,13 @@ view model =
 It only changes to use `lazy` on `view` function.
 
 Though it successfully reduces some useless rerendering events, it changes the behavior of input field!
-To ensure, enter "s" "3" "a", as previously we did on [sample page](https://arowm.github.io/elm-istring/lazy.html).
+
+To ensure, enter "s" "3" "a", as previously we did, on [sample page](https://arowm.github.io/elm-istring/lazy.html).
 If you enter "s", it shows "s" on input field and the "s" remains till you push "3".
 Furthermore, if you input "a" after that, "3a" is shown on the input field...
 
 This is because `input` tags have some sort of their own state, and it breaks Single Source of Truth of our code.
+
 Initially, `model.value` is `""`, and the input `tag` has state `""` as its `value`.
 How it goes after entering "s"?
 The `normalize` function convert it to `""`, it is as same as initial value, so `lazy` decides not to rerender `digitInput`.
